@@ -12,7 +12,7 @@ echo "Bootstrap from: $REPO_ROOT"
 
 echo "Installing dependencies..."
 
-sudo apt update && sudo apt install -y git curl wget unzip zsh ripgrep fd-find gcc make build-essential python3-pip python3-venv
+sudo apt update && sudo apt install -y git curl wget unzip zsh ripgrep fd-find gcc make build-essential python3-pip python3-venv python3-pynvim
 
 if ! command -v fd &>/dev/null; then
   ln -sf "$(which fdfind)" "$LOCAL_BIN/fd"
@@ -23,6 +23,11 @@ if ! command -v node &>/dev/null; then
   echo "Installing Node.js & NPM..."
   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   sudo apt-get install -y nodejs
+fi
+
+if ! npm list -g neovim &>/dev/null; then
+  echo "Installing Neovim NPM provider..."
+  sudo npm install -g neovim
 fi
 
 if ! command -v tree-sitter &>/dev/null; then
