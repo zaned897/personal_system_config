@@ -17,13 +17,17 @@ sudo apt update && sudo apt install -y git curl wget unzip zsh ripgrep fd-find g
 if ! command -v fd &>/dev/null; then
   ln -sf "$(which fdfind)" "$LOCAL_BIN/fd"
   echo "Alias created: fd -> fdfind"
-
 fi
 
 if ! command -v node &>/dev/null; then
   echo "Installing Node.js & NPM..."
   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   sudo apt-get install -y nodejs
+fi
+
+if ! command -v tree-sitter &>/dev/null; then
+  echo "Installing Tree-sitter CLI..."
+  sudo npm install -g tree-sitter-cli
 fi
 
 if ! command -v lazygit &>/dev/null; then
@@ -45,7 +49,6 @@ if ! command -v nvim &>/dev/null; then
   mv nvim-linux-x86_64 "$HOME/.local/nvim"
   ln -sf "$HOME/.local/nvim/bin/nvim" "$LOCAL_BIN/nvim"
   rm nvim.tar.gz
-
 fi
 
 if ! command -v zoxide &>/dev/null; then
@@ -56,7 +59,7 @@ if ! command -v oh-my-posh &>/dev/null; then
   curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$LOCAL_BIN"
 fi
 
-if [ ! -d "$HOME"/.fzf ]; then
+if [ ! -d "$HOME/.fzf" ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install --all --no-update-rc
 fi
