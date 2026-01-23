@@ -21,6 +21,8 @@ return {
 			paste = { ["+"] = paste, ["*"] = paste },
 		}
 
-		vim.opt.clipboard = "aunnameplus"
+		vim.schedule(function()
+			vim.opt.clipboard = "unnamedplus"
+		end)
 	end,
 }

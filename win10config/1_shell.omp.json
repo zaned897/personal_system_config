@@ -7,19 +7,31 @@
   },
   "console_title_template": "{{ .Folder }}",
   "blocks": [
-     {
+    {
       "alignment": "left",
       "newline": true,
       "segments": [
         {
+          "type": "os",
+          "style": "diamond",
           "foreground": "#ae84f0",
-          "leading_diamond": "<#b146c2> \ue200 </> \ue62a",
+          "leading_diamond": "<#b146c2> \ue200 </>",
+          "template": "{{ .Icon }}",
+          "properties": {
+            "windows": "\ue62a",
+            "linux": "\uf17c",
+            "macos": "\uf179"
+          }
+        },
+        {
+          "type": "time",
+          "style": "diamond",
+          "foreground": "#ae84f0",
+          "leading_diamond": "", 
           "properties": {
             "time_format": "3:04 PM"
           },
-          "style": "diamond",
-          "template": " {{ .CurrentDate | date .Format }} ",
-          "type": "time"
+          "template": " {{ .CurrentDate | date .Format }} "
         },
         {
           "foreground": "#bc9eb6",
