@@ -22,12 +22,11 @@ fi
 if ! command -v nvim &>/dev/null; then
   echo "Installing Neovim"
   cd /tmp
-
-  wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
   tar xzf nvim.tar.gz
 
   rm -rf "$HOME/.local/nvim"
-  mv nvim-linux64 "$HOME/.local/nvim"
+  mv nvim-linux-x86_64 "$HOME/.local/nvim"
   ln -sf "$HOME/.local/nvim/bin/nvim" "$LOCAL_BIN/nvim"
   rm nvim.tar.gz
 
