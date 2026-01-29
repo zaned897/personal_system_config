@@ -5,6 +5,9 @@ REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 SOURCE_DIR="$REPO_ROOT/win10config"
 LOCAL_BIN="$HOME/.local/bin"
 
+NVIM_VERSION="v0.11.2"
+NVIM_DIR="$HOME/.local/nvim-$NVIM_VERSION"
+
 mkdir -p "$LOCAL_BIN"
 export PATH="$LOCAL_BIN:$PATH"
 
@@ -44,17 +47,15 @@ if ! command -v lazygit &>/dev/null; then
   rm lazygit lazygit.tar.gz
 fi
 
-if ! command -v nvim &>/dev/null; then
-  echo "Installing Neovim"
-  cd /tmp
-  wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-  tar xzf nvim.tar.gz
+echo "Installing Neovim"
+cd /tmp
+wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-linux-x86_64.tar.gz
+tar xzf nvim.tar.gz
 
-  rm -rf "$HOME/.local/nvim"
-  mv nvim-linux-x86_64 "$HOME/.local/nvim"
-  ln -sf "$HOME/.local/nvim/bin/nvim" "$LOCAL_BIN/nvim"
-  rm nvim.tar.gz
-fi
+rm -rf "$NVIM_DIR"
+mv nvim-linux-x86_64 "$NVIM_DIR"
+ln -sf "$NVIM_DIR/bin/nvim" "$LOCAL_BIN/nvim"
+rm nvim.tar.gz
 
 if ! command -v zoxide &>/dev/null; then
   curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
